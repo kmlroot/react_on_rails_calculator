@@ -36,8 +36,6 @@ export default class Project extends React.Component {
   render() {
     const {user, projects} = this.props;
 
-    console.log(projects)
-
     return (
       <div>
         <div className="simulation">
