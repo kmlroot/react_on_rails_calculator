@@ -1,1 +1,5 @@
-<h1> I'm the home </h1>
+<% if current_user %>
+  <div class="container simulate-credit">
+    <%= link_to "Simulate a credit", new_simulation_url, class: "btn btn-lg btn-block btn-send btn-simulate" %>
+  </div>
+<% end %>

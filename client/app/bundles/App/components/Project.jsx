@@ -85,17 +85,25 @@ class Payments extends React.Component {
         <table>
           <thead>
             <tr>
-              <th>Cuota</th>
-              <th>Valor</th>
-              <th>Fetcha</th>
+              <th>Nº cuota</th>
+              <th>Beginning</th>
+              <th> PMT </th>
+              <th> Interest </th>
+              <th> Principal </th>
+              <th>Valor a pagar</th>
+              <th>Fecha</th>
             </tr>
           </thead>
           <tbody>
             {
               payments.map((payment) => {
                 return (
-                  <tr>
+                  <tr key={payment.fetcha}>
                     <td>{payment.cuota}</td>
+                    <td>{payment.loan_amount}</td>
+                    <td>{payment.pmt}</td>
+                    <td>{payment.interest}</td>
+                    <td>{payment.principal}</td>
                     <td>${payment.valor}</td>
                     <td>{payment.fetcha}</td>
                   </tr>

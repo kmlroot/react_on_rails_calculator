@@ -4,6 +4,7 @@ class SimulationsController < ApplicationController
 
   skip_before_action :verify_authenticity_token
   before_action :send_data
+  before_action :authenticate_user!
 
   # Methods
 
@@ -17,11 +18,29 @@ class SimulationsController < ApplicationController
     # http://stackoverflow.com/questions/30305447/how-to-build-an-amortization-table-in-ruby
     cada_cuota = project[:price] / simulation_params[:cuotas].to_f
 
+    # Periods
+    fee = simulation_params[:cuotas].to_f
+
+    # Rate - Tarifa - Interés
+    rate = simulation_params[:tasa].to_i
+
+    # Amount borrowed
+    loan_amount = current_user.budget
+
+    #project_price = project[:price].to_f
+
+    # Payment
+    pmt = loan_amount * ((rate * ( 1 + rate)**fee) / (( 1 + rate )**fee - 1))
+
     payments = (1..simulation_params[:cuotas].to_i).map do |cuota|
       {
         cuota: cuota.to_i,
-        fetcha: cuota.to_i.months.from_now,
-        valor: cada_cuota
+        loan_amount: loan_amount,
+        pmt: pmt,
+        interest: loan_amount * rate,
+        principal: pmt - (loan_amount * rate),
+        fetcha: cuota.to_i.months.from_now.strftime("%Y-%m-%d"),
+        valor: loan_amount - (pmt - (loan_amount * rate)),
       }
     end
 
