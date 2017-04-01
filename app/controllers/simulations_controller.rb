@@ -22,7 +22,7 @@ class SimulationsController < ApplicationController
     fee = simulation_params[:cuotas].to_f
 
     # Rate - Tarifa - Interés
-    rate = simulation_params[:tasa].to_i
+    rate = simulation_params[:tasa].to_i / 12.0
 
     # Amount borrowed
     loan_amount = current_user.budget
@@ -33,14 +33,17 @@ class SimulationsController < ApplicationController
     pmt = loan_amount * ((rate * ( 1 + rate)**fee) / (( 1 + rate )**fee - 1))
 
     payments = (1..simulation_params[:cuotas].to_i).map do |cuota|
+
+      interest = (loan_amount * rate)
+      ending_balance = (loan_amount - pmt - interest)
       {
         cuota: cuota.to_i,
         loan_amount: loan_amount,
         pmt: pmt,
-        interest: loan_amount * rate,
-        principal: pmt - (loan_amount * rate),
+        interest: interest,
+        principal: pmt - interest,
         fetcha: cuota.to_i.months.from_now.strftime("%Y-%m-%d"),
-        valor: loan_amount - (pmt - (loan_amount * rate)),
+        valor: ending_balance,
       }
     end
 

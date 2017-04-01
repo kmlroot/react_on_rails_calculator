@@ -1,4 +1,5 @@
 import React from 'react';
+const uuidV1 = require('uuid/v1');
 
 export default class Project extends React.Component {
   constructor(props, _railsContext) {
@@ -24,9 +25,9 @@ export default class Project extends React.Component {
           cuotas: this.cuotasInput.value
         }
       })
-    }).
-    then(response => response.json()).
-    then((payments) => {
+    })
+    .then(response => response.json())
+    .then((payments) => {
       this.setState({
         payments: payments
       });
@@ -44,7 +45,7 @@ export default class Project extends React.Component {
               <h2 className="align-middle">{user.name} - ${user.budget}</h2>
               <form onSubmit={(e) => this.onSubmit(e)}>
                 <div className="form-group">
-                  <label htmlFor="projects" class="sr-only">Projects</label>
+                  <label htmlFor="projects" className="sr-only">Projects</label>
                   <div className="input-group">
                     <select className="form-control" id="projects" ref={(input) => this.projectsInput = input}>
                       {
@@ -59,7 +60,7 @@ export default class Project extends React.Component {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="tasa">Tasa de interes</label>
+                  <label htmlFor="tasa">Tasa de interes anual</label>
                   <div className="input-group">
                     <div className="input-group-addon"><i className="fa fa-key" aria-hidden="true"></i></div>
                     <input id="tasa" className="form-control" type="text" ref={(input) => this.tasaInput = input}></input>
@@ -114,7 +115,7 @@ class Payments extends React.Component {
             {
               payments.map((payment) => {
                 return (
-                  <tr key={payment.fetcha}>
+                  <tr key={uuidV1()}>
                     <td>{payment.cuota}</td>
                     <td>{payment.loan_amount}</td>
                     <td>{payment.pmt}</td>
