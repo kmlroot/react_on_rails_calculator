@@ -8,7 +8,7 @@
           <label for="form-name-field" class="sr-only">Name</label>
           <div class="input-group">
             <div class="input-group-addon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></i></div>
-            <%= f.text_field :email, class: "form-control", id: "form-name-field", placeholder: "Name" %>
+            <%= f.text_field :name, class: "form-control", id: "form-name-field", placeholder: "Name" %>
           </div>
         </div>
 
@@ -43,7 +43,7 @@
           <div id="nameError" class="sr-only" role="alert"></div>
           <label for="form-name-field" class="sr-only">Password Confirmation</label>
           <div class="input-group">
-            <div class="input-group-addon"><i class="fa fa-unlock-alt" aria-hidden="true"></i></div>
+            <div class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></div>
             <%= f.password_field :password_confirmation, class: "form-control", id: "form-name-field", placeholder: "Password Confirmation" %>
           </div>
         </div>

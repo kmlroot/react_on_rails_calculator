@@ -40,8 +40,8 @@ export default class Project extends React.Component {
       <div>
         <div className="container">
           <div className="row">
-            <div className="form-box">
-              <h2 className="align-middle">{user.name} ${user.budget}</h2>
+            <div className="simulate-box">
+              <h2 className="align-middle">{user.name} - ${user.budget}</h2>
               <form onSubmit={(e) => this.onSubmit(e)}>
                 <div className="form-group">
                   <label htmlFor="projects" class="sr-only">Projects</label>
