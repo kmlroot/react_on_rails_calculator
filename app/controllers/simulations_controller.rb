@@ -1,15 +1,16 @@
 class SimulationsController < ApplicationController
-  skip_before_action :verify_authenticity_token
 
-  before_action :fake_data
+  # Callbacks
+
+  skip_before_action :verify_authenticity_token
+  before_action :send_data
+
+  # Methods
 
   def new
-    # @user_props = current_user
-    # @projects_props = current_user.projects
   end
 
   def create
-    # project = current_user.projects.find(simulation_params[:project_id])
     project = @projects_props.find{ |project| project[:id] == simulation_params[:project_id].to_i }
 
     # usando amortization schedule
@@ -29,20 +30,31 @@ class SimulationsController < ApplicationController
 
   private
 
-  def simulation_params
-    params.require(:simulation).permit(:project_id, :tasa, :cuotas)
-  end
+    def simulation_params
+      params.require(:simulation).permit(:project_id, :tasa, :cuotas).merge(current_user: current_user.id)
+    end
 
-  def fake_data
-    @user_props = {
-      id: 1,
-      name: 'Mauri',
-      budget: 1000
-    }
-    @projects_props = [
-      {id: 1, name: 'Proj 1', initial_fee: 5, price: 500, user_id: 1},
-      {id: 2, name: 'Proj 2', initial_fee: 1, price: 550, user_id: 1},
-      {id: 3, name: 'Proj 3', initial_fee: 0, price: 100, user_id: 1}
-    ]
-  end
+    def send_data
+      user_id = current_user.id
+      user_name = current_user.name
+      user_budget = current_user.budget
+
+      @user_props = {
+        id: user_id,
+        name: user_name,
+        budget: user_budget
+      }
+
+      @projects_props = []
+
+      current_user.projects.each do |project|
+        @projects_props.push({
+          id: project.id,
+          name: project.name,
+          initial_fee: project.initial_fee,
+          price: project.price,
+          user_id: project.user_id
+        })
+      end
+    end
 end

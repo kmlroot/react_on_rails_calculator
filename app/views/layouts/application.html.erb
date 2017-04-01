@@ -9,6 +9,13 @@
   </head>
 
   <body>
+    <% if current_user %>
+      <%= link_to "Signout", destroy_user_session_url, method: :delete %>
+      <%= link_to "Simulate credit", new_simulation_url %>
+    <% else %>
+      <%= link_to "Signin", new_user_session_url %>
+      <%= link_to "Signup", new_user_registration_url %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

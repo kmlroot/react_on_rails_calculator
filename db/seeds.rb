@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+require "faker"
+
+10.times do
+  projects = Project.create([
+    { name: Faker::Name.name, initial_fee: Faker::Number.decimal(2), price: Faker::Number.decimal(2) }
+  ])
+end

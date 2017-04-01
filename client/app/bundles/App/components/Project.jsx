@@ -13,6 +13,7 @@ export default class Project extends React.Component {
 
     fetch('/simulations', {
       method: 'post',
+      credentials: 'same-origin',
       headers: new Headers({
         'Content-Type': 'application/json'
       }),
@@ -34,6 +35,8 @@ export default class Project extends React.Component {
 
   render() {
     const {user, projects} = this.props;
+
+    console.log(projects)
 
     return (
       <div>
