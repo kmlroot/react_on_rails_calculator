@@ -9,12 +9,30 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">LAHAUS</a>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <% if current_user %>
+            <%= link_to "Signout", destroy_user_session_url, method: :delete, class: "nav-item nav-link active" %>
+          <% else %>
+              <%= link_to "Signin", new_user_session_url, class: "nav-item nav-link" %>
+              <%= link_to "Signup", new_user_registration_url, class: "nav-item nav-link" %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
 
-    <% if current_user %>
-      <%= link_to "Signout", destroy_user_session_url, method: :delete %>
-    <% else %>
-      <%= link_to "Signin", new_user_session_url %>
-      <%= link_to "Signup", new_user_registration_url %>
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %> alert-dismissable" role="alert">
+      <button type="button" data-dismiss="alert" class="close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <%= value %>
+      </div>
     <% end %>
 
     <%= yield %>

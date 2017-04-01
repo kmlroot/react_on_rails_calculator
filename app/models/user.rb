@@ -14,6 +14,10 @@ class User < ApplicationRecord
 
   after_create :load_projects
 
+  # Validations
+
+  validates :name, :budget, presence: true
+
   # Methods
 
   def load_projects

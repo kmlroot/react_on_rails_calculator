@@ -38,38 +38,54 @@ export default class Project extends React.Component {
 
     return (
       <div>
-        <div className="simulation">
-          <h2>{user.name} ${user.budget}</h2>
-          <form onSubmit={(e) => this.onSubmit(e)}>
-            <div className="input-row">
-              <label htmlFor="projects">Projects:</label>
-              <select id="projects" ref={(input) => this.projectsInput = input}>
-                {
-                  projects.map((project) => {
-                    return (
-                      <option key={project.id} value={project.id}>{project.name}</option>
-                    )
-                  })
-                }
-              </select>
+        <div className="container">
+          <div className="row">
+            <div className="form-box">
+              <h2 className="align-middle">{user.name} ${user.budget}</h2>
+              <form onSubmit={(e) => this.onSubmit(e)}>
+                <div className="form-group">
+                  <label htmlFor="projects" class="sr-only">Projects</label>
+                  <div className="input-group">
+                    <select className="form-control" id="projects" ref={(input) => this.projectsInput = input}>
+                      {
+                        projects.map((project) => {
+                          return (
+                            <option key={project.id} value={project.id}>{project.name}</option>
+                          )
+                        })
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="tasa">Tasa de interes</label>
+                  <div className="input-group">
+                    <div className="input-group-addon"><i className="fa fa-key" aria-hidden="true"></i></div>
+                    <input id="tasa" className="form-control" type="text" ref={(input) => this.tasaInput = input}></input>
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="tasa">Nº cuotas</label>
+                  <div className="input-group">
+                    <div className="input-group-addon"><i className="fa fa-key" aria-hidden="true"></i></div>
+                    <input id="cuotas" className="form-control" type="text" ref={(input) => this.cuotasInput = input}></input>
+                  </div>
+                </div>
+
+
+                <div className="input-row">
+                  <button type="submit" className="btn btn-lg btn-block btn-send">Simular Credito</button>
+                </div>
+              </form>
             </div>
-            <div className="input-row">
-              <label htmlFor="tasa">Tasa de interest</label>
-              <input id="tasa" type="text" ref={(input) => this.tasaInput = input}></input>
-            </div>
-            <div className="input-row">
-              <label htmlFor="cuotas">No Cuotas</label>
-              <input id="cuotas" type="text" ref={(input) => this.cuotasInput = input}></input>
-            </div>
-            <div className="input-row">
-              <button type="submit">Simular Credito</button>
-            </div>
-          </form>
+          </div>
         </div>
         {
           this.state.payments ?
           <Payments payments={this.state.payments} />
-          : <div>Choose a project.</div>
+          : <span></span>
         }
       </div>
     );
@@ -82,8 +98,8 @@ class Payments extends React.Component {
 
     return (
       <div className="payments">
-        <table>
-          <thead>
+        <table className="table table-bordered">
+          <thead className="thead-inverse">
             <tr>
               <th>Nº cuota</th>
               <th>Beginning</th>

@@ -4,6 +4,7 @@
     <div class="form-box">
       <img src="https://s3-us-west-2.amazonaws.com/mauricioserna/static/lah.png"/>
       <%= form_for(resource, as: resource_name, html: { id: "contact-form" }, url: session_path(resource_name)) do |f| %>
+      
         <div class="form-group">
           <div id="nameError" class="sr-only" role="alert"></div>
           <label for="form-name-field" class="sr-only">Email</label>
