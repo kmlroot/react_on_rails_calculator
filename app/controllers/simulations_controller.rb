@@ -3,7 +3,7 @@ class SimulationsController < ApplicationController
   # Callbacks
 
   skip_before_action :verify_authenticity_token
-  before_action :send_data, if: :exist_user?
+  before_action :send_data
   before_action :authenticate_user!
 
   # Methods
@@ -51,11 +51,6 @@ class SimulationsController < ApplicationController
   end
 
   private
-
-    def exist_user?
-      return true if current_user
-      return false
-    end
 
     def simulation_params
       params.require(:simulation).permit(:project_id, :tasa, :cuotas).merge(current_user: current_user.id)
