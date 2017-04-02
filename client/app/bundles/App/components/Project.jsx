@@ -60,7 +60,7 @@ export default class Project extends React.Component {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="tasa">Tasa de interes anual</label>
+                  <label htmlFor="tasa">Annual interest rate</label>
                   <div className="input-group">
                     <div className="input-group-addon"><i className="fa fa-key" aria-hidden="true"></i></div>
                     <input id="tasa" className="form-control" type="text" ref={(input) => this.interestInput = input}></input>
@@ -68,7 +68,7 @@ export default class Project extends React.Component {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="tasa">Nº cuotas</label>
+                  <label htmlFor="tasa">Nº fees</label>
                   <div className="input-group">
                     <div className="input-group-addon"><i className="fa fa-key" aria-hidden="true"></i></div>
                     <input id="cuotas" className="form-control" type="text" ref={(input) => this.feeInput = input}></input>
@@ -77,7 +77,7 @@ export default class Project extends React.Component {
 
 
                 <div className="input-row">
-                  <button type="submit" className="btn btn-lg btn-block btn-send">Simular Credito</button>
+                  <button type="submit" className="btn btn-lg btn-block btn-send">Simulate credit</button>
                 </div>
               </form>
             </div>
