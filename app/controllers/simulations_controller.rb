@@ -14,15 +14,11 @@ class SimulationsController < ApplicationController
   def create
     project = @projects_props.find{ |project| project[:id] == simulation_params[:project_id].to_i }
 
-    # usando amortization schedule
-    # http://stackoverflow.com/questions/30305447/how-to-build-an-amortization-table-in-ruby
-    cada_cuota = project[:price] / simulation_params[:cuotas].to_f
-
     # Periods
-    fee = simulation_params[:cuotas].to_f
+    fee = simulation_params[:fee].to_f
 
     # Rate - Tarifa - Interés
-    rate = simulation_params[:tasa].to_i / 12.0
+    rate = simulation_params[:interest].to_i / 12.0
 
     # Amount borrowed
     loan_amount = current_user.budget
@@ -32,7 +28,7 @@ class SimulationsController < ApplicationController
     # Payment
     pmt = loan_amount * ((rate * ( 1 + rate)**fee) / (( 1 + rate )**fee - 1))
 
-    payments = (1..simulation_params[:cuotas].to_i).map do |cuota|
+    payments = (1..simulation_params[:fee].to_i).map do |cuota|
 
       interest = (loan_amount * rate)
       ending_balance = (loan_amount - pmt - interest)
@@ -53,7 +49,7 @@ class SimulationsController < ApplicationController
   private
 
     def simulation_params
-      params.require(:simulation).permit(:project_id, :tasa, :cuotas).merge(current_user: current_user.id)
+      params.require(:simulation).permit(:project_id, :fee, :interest).merge(current_user: current_user.id)
     end
 
     def send_data

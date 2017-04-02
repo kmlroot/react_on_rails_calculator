@@ -21,8 +21,8 @@ export default class Project extends React.Component {
       body: JSON.stringify({
         simulation: {
           project_id: this.projectsInput.value,
-          tasa: this.tasaInput.value,
-          cuotas: this.cuotasInput.value
+          interest: this.interestInput.value,
+          fee: this.feeInput.value
         }
       })
     })
@@ -63,7 +63,7 @@ export default class Project extends React.Component {
                   <label htmlFor="tasa">Tasa de interes anual</label>
                   <div className="input-group">
                     <div className="input-group-addon"><i className="fa fa-key" aria-hidden="true"></i></div>
-                    <input id="tasa" className="form-control" type="text" ref={(input) => this.tasaInput = input}></input>
+                    <input id="tasa" className="form-control" type="text" ref={(input) => this.interestInput = input}></input>
                   </div>
                 </div>
 
@@ -71,7 +71,7 @@ export default class Project extends React.Component {
                   <label htmlFor="tasa">Nº cuotas</label>
                   <div className="input-group">
                     <div className="input-group-addon"><i className="fa fa-key" aria-hidden="true"></i></div>
-                    <input id="cuotas" className="form-control" type="text" ref={(input) => this.cuotasInput = input}></input>
+                    <input id="cuotas" className="form-control" type="text" ref={(input) => this.feeInput = input}></input>
                   </div>
                 </div>
 
