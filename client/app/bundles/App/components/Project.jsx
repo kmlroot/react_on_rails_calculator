@@ -103,10 +103,6 @@ class Payments extends React.Component {
           <thead className="thead-inverse">
             <tr>
               <th>Nº cuota</th>
-              <th>Beginning</th>
-              <th> PMT </th>
-              <th> Interest </th>
-              <th> Principal </th>
               <th>Valor a pagar</th>
               <th>Fecha</th>
             </tr>
@@ -116,12 +112,8 @@ class Payments extends React.Component {
               payments.map((payment) => {
                 return (
                   <tr key={uuidV1()}>
-                    <td>{payment.cuota}</td>
-                    <td>{payment.loan_amount}</td>
-                    <td>{payment.pmt}</td>
-                    <td>{payment.interest}</td>
-                    <td>{payment.principal}</td>
-                    <td>${payment.valor}</td>
+                    <td>{payment.period}</td>
+                    <td>${payment.loan_remaining}</td>
                     <td>{payment.fetcha}</td>
                   </tr>
                 );

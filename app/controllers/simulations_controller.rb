@@ -14,36 +14,13 @@ class SimulationsController < ApplicationController
   def create
     project = @projects_props.find{ |project| project[:id] == simulation_params[:project_id].to_i }
 
-    # Periods
     fee = simulation_params[:fee].to_f
-
-    # Rate - Tarifa - Interés
     rate = simulation_params[:interest].to_i / 12.0
+    project_price = project[:price].to_f
 
-    # Amount borrowed
-    loan_amount = current_user.budget
+    amortization = AmortizationSchedule.new(project_price, fee, rate)
 
-    #project_price = project[:price].to_f
-
-    # Payment
-    pmt = loan_amount * ((rate * ( 1 + rate)**fee) / (( 1 + rate )**fee - 1))
-
-    payments = (1..simulation_params[:fee].to_i).map do |cuota|
-
-      interest = (loan_amount * rate)
-      ending_balance = (loan_amount - pmt - interest)
-      {
-        cuota: cuota.to_i,
-        loan_amount: loan_amount,
-        pmt: pmt,
-        interest: interest,
-        principal: pmt - interest,
-        fetcha: cuota.to_i.months.from_now.strftime("%Y-%m-%d"),
-        valor: ending_balance,
-      }
-    end
-
-    render json: payments
+    render json: amortization.payments
   end
 
   private
