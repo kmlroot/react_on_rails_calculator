@@ -2,6 +2,7 @@
 
 - git clone
 - cd lahaus
+- bundle && yarn install
 - rails db:drop db:create db:migrate db:seed
 - yarn rails-server
 
