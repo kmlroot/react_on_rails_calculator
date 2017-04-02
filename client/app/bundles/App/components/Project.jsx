@@ -63,15 +63,15 @@ export default class Project extends React.Component {
                   <label htmlFor="tasa">Annual interest rate</label>
                   <div className="input-group">
                     <div className="input-group-addon"><i className="fa fa-key" aria-hidden="true"></i></div>
-                    <input id="tasa" className="form-control" type="text" ref={(input) => this.interestInput = input}></input>
+                    <input id="tasa" className="form-control" type="number" ref={(input) => this.interestInput = input}></input>
                   </div>
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="tasa">Nº fees</label>
+                  <label htmlFor="tasa">How many payments?</label>
                   <div className="input-group">
                     <div className="input-group-addon"><i className="fa fa-key" aria-hidden="true"></i></div>
-                    <input id="cuotas" className="form-control" type="text" ref={(input) => this.feeInput = input}></input>
+                    <input id="cuotas" className="form-control" type="number" ref={(input) => this.feeInput = input}></input>
                   </div>
                 </div>
 
@@ -102,9 +102,9 @@ class Payments extends React.Component {
         <table className="table table-bordered">
           <thead className="thead-inverse">
             <tr>
-              <th>Nº cuota</th>
-              <th>Valor a pagar</th>
-              <th>Fecha</th>
+              <th>Payment Nº</th>
+              <th>Estimate Payment</th>
+              <th>Date</th>
             </tr>
           </thead>
           <tbody>
