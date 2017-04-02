@@ -114,7 +114,7 @@ class Payments extends React.Component {
                   <tr key={uuidV1()}>
                     <td>{payment.period}</td>
                     <td>${payment.loan_remaining}</td>
-                    <td>{payment.fetcha}</td>
+                    <td>{payment.date}</td>
                   </tr>
                 );
               })
