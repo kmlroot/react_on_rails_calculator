@@ -1,7 +1,5 @@
 # LAH
 
-[![Build Status](https://travis-ci.org/fmauricios/lahaus.svg?branch=master)](https://travis-ci.org/fmauricios/lahaus)
-
 - git clone
 - cd lahaus
 - rails db:drop db:create db:migrate db:seed
